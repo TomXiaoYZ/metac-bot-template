@@ -5,7 +5,7 @@
 - 工作树：/Users/tomxiao/Code/metac-bot-template/.worktrees/bump-forecasting-tools
 - 分支：task/bump-forecasting-tools（基于 main，起点提交 bcbd016）
 - 集成目标：fork 的 main，经 PR，由 Tom 批准
-- Codex 线程：派出后由任务会话回填
+- Codex 线程：01a1e97b-0e36-7921-867a-d8c220a5cc7b
 
 整张卡不超过 12 KB，不贴源码和日志：引用文件路径和符号名，Codex 自己读工作树。
 最多两轮；第二轮仍不通过就拆卡或交 Tom。
@@ -117,3 +117,8 @@ next: none
 ### 第 1 轮
 
 原始任务。
+
+判决（验收）：accept，线程 01a1e97b-0e36-7921-867a-d8c220a5cc7b，回执 done。
+- uv.lock 只有 forecasting-tools 0.3.5 -> 0.3.7（PyPI sdist/wheel）；其他包版本无变化；`uv lock --check` 实跑通过。
+- 附带变化：uv 把锁格式 `revision` 3 -> 5（uv 自动，无包变化）。
+- 预算 源码 +0 / 0 个文件；diff_audit 防御性代码 0 处；主检出 status 为空；无 .venv。
