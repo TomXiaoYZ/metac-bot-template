@@ -116,3 +116,6 @@ next: none
 ### 第 1 轮
 
 原始任务。
+
+- 回执：status done，human_action none，源码 +12 / 1 文件，自检通过，编译通过。
+- 判决：accept（2026-11-17，CC）。四个模型字符串逐字一致；default 为 GeneralLlm、temperature=0.3、timeout=120、allowed_tries=2；唯一构造点覆盖所有运行模式；仅改 main.py；无回退/开关/校验；diff_audit 预算内、防御代码 0 处。
