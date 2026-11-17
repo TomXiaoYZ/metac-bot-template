@@ -693,12 +693,14 @@ if __name__ == "__main__":
     parser.add_argument(
         "--mode",
         type=str,
-        choices=["tournament", "metaculus_cup", "test_questions"],
+        choices=["tournament", "metaculus_cup", "market_pulse", "test_questions"],
         default="tournament",
         help="What to forecast on (default: tournament)",
     )
     args = parser.parse_args()
-    run_mode: Literal["tournament", "metaculus_cup", "test_questions"] = args.mode
+    run_mode: Literal[
+        "tournament", "metaculus_cup", "market_pulse", "test_questions"
+    ] = args.mode
 
     check_environment(strict=True)
     publish_to_metaculus = True
@@ -732,6 +734,7 @@ if __name__ == "__main__":
     TOURNAMENT_URLS = {
         "tournament": "https://www.metaculus.com/tournament/fall-futureeval-2026/",
         "metaculus_cup": "https://www.metaculus.com/tournament/metaculus-cup-fall-2026/",
+        "market_pulse": "https://www.metaculus.com/tournament/market-pulse-26q4/",
         "test_questions": "https://www.metaculus.com/tournament/bot-testing-area/",
     }
 
@@ -760,6 +763,14 @@ if __name__ == "__main__":
         forecast_reports = asyncio.run(
             template_bot.forecast_on_tournament(
                 client.CURRENT_METACULUS_CUP_ID, return_exceptions=True
+            )
+        )
+    # Market Pulse 按关题时的预测计分，所以每天要重新预测。
+    elif run_mode == "market_pulse":
+        template_bot.skip_previously_forecasted_questions = False
+        forecast_reports = asyncio.run(
+            template_bot.forecast_on_tournament(
+                client.CURRENT_MARKET_PULSE_ID, return_exceptions=True
             )
         )
     elif run_mode == "test_questions":
