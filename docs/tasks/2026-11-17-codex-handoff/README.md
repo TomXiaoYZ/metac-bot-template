@@ -73,3 +73,27 @@ next: <none 或建议>
 ## 轮次
 
 ### 第 1 轮
+
+- Codex 线程：01a1e971-daba-75a2-a553-faf82e1b1670（gpt-6-astra/xhigh，网络关，MCP 关，stopAudit=true）
+- 回执：status done；human_action none；blockers none
+
+判决（2026-11-17，Claude Code 任务会话）：
+
+```
+verdict: accept
+final: false
+thread: 01a1e971-daba-75a2-a553-faf82e1b1670
+receipt_status: done
+self_audit: 回执未提供该字段
+budget: 源码 +0 / 0 文件（只新增 docs/handoff/2026-11-17-codex-handoff.md）
+audit: 0 处防御性代码
+checklist: 10/10
+acceptance:
+  - 文档存在、九节齐全、事实带出处: pass（抽查 uv.lock:583-586、bot_helpers 密钥检查、main.py:704/718 均一致）
+  - 第 3 节命令与 README/workflow 一致: pass（README 83–136 行与 4 个 workflow 的 uv sync --locked / uv run / cron 逐条核对）
+  - 第 4 节分支/工作树与 git branch -a、git worktree list 一致: pass（7 个 origin 分支、2 个工作树、upstream...main = 0 0）
+  - 主检出未改、只新增这一份文档: pass
+main_checkout_clean: yes
+human_action: none
+备注: 第 6 节 forecasting-tools 0.3.5 版本已核实；只设 OPENROUTER_API_KEY 时的默认模型标“未核实”（本机 uv 缓存/.local/anaconda 均无 forecasting_tools 源码，已复查），修复卡需先联网取 0.3.5 源码核对。知识库检查：交接文档合规；任务卡本身缺 frontmatter，属项目会话写卡时的遗留，不影响本卡判决。
+```
