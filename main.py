@@ -704,9 +704,7 @@ if __name__ == "__main__":
     publish_to_metaculus = True
     print_startup_banner(run_mode, will_publish=publish_to_metaculus)
 
-    # Configure the bot. The `llms=` block below is commented out to use
-    # whichever default models forecasting-tools picks based on your env vars;
-    # uncomment and edit to pin specific models.
+    # 固定使用便宜模型以降低预测成本。
     template_bot = FallTemplateBot2026(
         research_reports_per_question=1,
         predictions_per_research_report=5,
@@ -715,17 +713,17 @@ if __name__ == "__main__":
         folder_to_save_reports_to=None,
         skip_previously_forecasted_questions=True,
         extra_metadata_in_explanation=True,
-        # llms={
-        #     "default": GeneralLlm(
-        #         model="openrouter/openai/gpt-4o",
-        #         temperature=0.3,
-        #         timeout=40,
-        #         allowed_tries=2,
-        #     ),
-        #     "summarizer": "openai/gpt-4o-mini",
-        #     "researcher": "asknews/news-summaries",
-        #     "parser": "openai/gpt-4o-mini",
-        # },
+        llms={
+            "default": GeneralLlm(
+                model="openrouter/anthropic/claude-haiku-5.5",
+                temperature=0.3,
+                timeout=120,
+                allowed_tries=2,
+            ),
+            "summarizer": "openrouter/anthropic/claude-haiku-5.5",
+            "researcher": "openrouter/perplexity/sonar",
+            "parser": "openrouter/anthropic/claude-haiku-5.5",
+        },
     )
 
     # Per-mode tournament URL shown in the summary banner footer. These
