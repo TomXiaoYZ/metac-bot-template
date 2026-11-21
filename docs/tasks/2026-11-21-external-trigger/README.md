@@ -139,3 +139,26 @@ next: 下一步或 none
 ### 第 1 轮
 
 按本卡实现三个脚本和 `tests/test_launchd_trigger.py`。
+
+**判决（第 1 轮）**
+
+```
+verdict: accept
+final: false
+thread: 01a1fd0c-0b1a-78f0-9b89-5ab7789d0284
+receipt_status: done
+self_audit: 回合末自检通过（diff_audit 基线 c0a5020，预算内，清单外文件 0，防御性代码命中 0）
+budget: 源码 +85 行 / 3 个文件（预算 150/3）；测试 184/200 行
+audit: 0 处防御性代码，其中 0 处无依据
+checklist: 10/10
+acceptance:
+  - trigger 脚本常量/-R/queued+in_progress/跳过/已触发/UTC/裁剪2000: pass
+  - install.sh plist 字段、bootout 再 bootstrap: pass
+  - uninstall.sh 保留日志: pass
+  - 假 HOME + 桩 PATH 运行: pass
+  - unittest 8 项全过（含 7 项指定 + 1 项额外 list 失败）: pass
+  - bash -n: pass；无 token 读取/打印: pass；仅新增 scripts/ 与 tests/: pass
+main_checkout_clean: yes
+human_action: none
+```
+备注：install.sh 用 `launchctl print` 判断是否已加载（卡写法允许）；unittest 在默认 Anaconda python 下同样通过。
